@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>森晟文旅 · SunShore Journey Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-deep: #1a4a55;
+    --teal-mid: #2d7a8a;
+    --teal-light: #4a9db0;
+    --teal-pale: #8fcdd8;
+    --cream: #f5efe6;
+    --cream-dark: #e8ddd0;
+    --rust: #8b3a2a;
+    --rust-light: #b5523f;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --ink: #1c2833;
+    --text-main: #2c3e40;
+    --text-sub: #5a7075;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--cream);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(26, 74, 85, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 68px;
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px; cursor: pointer;
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 42px; height: 42px;
+    background: var(--rust);
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
+    color: var(--cream); letter-spacing: 1px;
+  }
+  .nav-logo-text { display: flex; flex-direction: column; }
+  .nav-logo-cn { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--cream); line-height: 1.1; }
+  .nav-logo-en { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; color: var(--gold-light); text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 4px; }
+  .nav-link {
+    color: rgba(245,239,230,0.8); font-size: 13.5px; font-weight: 400;
+    padding: 8px 16px; border-radius: 4px; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.5px; border: none; background: none;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--gold-light); background: rgba(201,168,76,0.12);
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--teal-deep) 0%, #0e3040 40%, #1a3a2a 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding-top: 68px;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+    background-size: 40px 40px;
+  }
+  .hero-circle {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero-circle-1 { width: 600px; height: 600px; right: -100px; top: 50%; transform: translateY(-50%); }
+  .hero-circle-2 { width: 400px; height: 400px; right: 50px; top: 50%; transform: translateY(-50%); }
+  .hero-circle-3 { width: 200px; height: 200px; right: 200px; top: 50%; transform: translateY(-50%); }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 80px 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-left { animation: fadeInLeft 1s ease both; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light); font-size: 11px; letter-spacing: 4px;
+    padding: 6px 16px; border-radius: 2px; margin-bottom: 28px;
+    text-transform: uppercase; font-family: 'Cinzel', serif;
+  }
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 900; color: var(--cream);
+    line-height: 1.15; margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(13px, 1.5vw, 18px);
+    color: var(--teal-pale); letter-spacing: 4px;
+    margin-bottom: 32px; font-weight: 400;
+  }
+  .hero-desc {
+    font-size: 15px; color: rgba(245,239,230,0.7);
+    line-height: 2; max-width: 500px; margin-bottom: 48px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rust); color: var(--cream);
+    padding: 14px 36px; border: none; cursor: pointer;
+    font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 2px; transition: all 0.3s; position: relative; overflow: hidden;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover { background: var(--rust-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--gold-light);
+    padding: 14px 36px; border: 1px solid rgba(201,168,76,0.5); cursor: pointer;
+    font-family: 'Noto Serif SC', serif; font-size: 14px;
+    letter-spacing: 2px; transition: all 0.3s;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+  .hero-right { animation: fadeInRight 1s ease both; }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: rgba(201,168,76,0.2); padding: 2px; border-radius: 4px;
+  }
+  .hero-stat {
+    background: rgba(26,74,85,0.8); padding: 32px 24px;
+    text-align: center; backdrop-filter: blur(8px);
+  }
+  .hero-stat:first-child { border-radius: 2px 0 0 0; }
+  .hero-stat:nth-child(2) { border-radius: 0 2px 0 0; }
+  .hero-stat:nth-child(3) { border-radius: 0 0 0 2px; }
+  .hero-stat:last-child { border-radius: 0 0 2px 0; }
+  .stat-num {
+    font-family: 'Cinzel', serif; font-size: 36px; font-weight: 600;
+    color: var(--gold); display: block; line-height: 1;
+  }
+  .stat-unit { font-size: 14px; color: var(--gold-light); }
+  .stat-label { font-size: 12px; color: rgba(245,239,230,0.6); margin-top: 8px; letter-spacing: 1px; }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(245,239,230,0.4); font-size: 11px; letter-spacing: 3px;
+    animation: bounce 2s infinite;
+  }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, var(--gold-light)); }
+
+  /* ─── SECTION COMMON ─── */
+  .section { padding: 100px 0; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .section-header { text-align: center; margin-bottom: 70px; }
+  .section-eyebrow {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 5px;
+    color: var(--rust); text-transform: uppercase; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--rust);
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
+    color: var(--teal-deep); line-height: 1.3; margin-bottom: 20px;
+  }
+  .section-sub { font-size: 15px; color: var(--text-sub); max-width: 600px; margin: 0 auto; line-height: 1.9; }
+
+  /* ─── HOME: VALUE PROPS ─── */
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--teal-mid); }
+  .value-card {
+    background: var(--cream); padding: 48px 32px;
+    transition: all 0.3s; cursor: default; position: relative; overflow: hidden;
+  }
+  .value-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--rust); transform: scaleX(0); transition: transform 0.3s;
+  }
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(26,74,85,0.15); }
+  .value-icon {
+    width: 56px; height: 56px; background: var(--teal-deep);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 24px;
+  }
+  .value-title { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; color: var(--teal-deep); margin-bottom: 12px; }
+  .value-desc { font-size: 13.5px; color: var(--text-sub); line-height: 2; }
+
+  /* ─── MARKET PAGE ─── */
+  .market-hero {
+    background: linear-gradient(135deg, var(--teal-deep) 0%, #0e2d38 100%);
+    padding: 120px 0 80px; position: relative; overflow: hidden;
+  }
+  .market-hero::after {
+    content: '市场'; position: absolute; right: -20px; bottom: -60px;
+    font-family: 'Noto Serif SC', serif; font-size: 200px; font-weight: 900;
+    color: rgba(255,255,255,0.03); pointer-events: none; line-height: 1;
+  }
+  .market-hero .section-inner { text-align: center; }
+  .market-hero .section-title { color: var(--cream); }
+  .market-hero .section-sub { color: rgba(245,239,230,0.65); }
+
+  .stats-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--rust);
+    padding: 0;
+  }
+  .strip-item {
+    padding: 36px 24px; text-align: center; position: relative;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .strip-item:last-child { border-right: none; }
+  .strip-num {
+    font-family: 'Cinzel', serif; font-size: 38px; font-weight: 600;
+    color: var(--cream); display: block;
+  }
+  .strip-unit { font-size: 14px; color: rgba(245,239,230,0.7); }
+  .strip-label { font-size: 12px; color: rgba(245,239,230,0.6); margin-top: 6px; letter-spacing: 1px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
+  .info-card {
+    background: white; border-radius: 4px; padding: 40px;
+    box-shadow: 0 4px 30px rgba(26,74,85,0.08);
+    border-top: 3px solid var(--teal-mid);
+    transition: all 0.3s;
+  }
+  .info-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,74,85,0.15); }
+  .info-card-title {
+    font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700;
+    color: var(--teal-deep); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .info-card-title .dot {
+    width: 8px; height: 8px; background: var(--rust); border-radius: 50%; flex-shrink: 0;
+  }
+  .info-card p { font-size: 13.5px; color: var(--text-sub); line-height: 2; }
+
+  .policy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--cream-dark); }
+  .policy-card {
+    background: white; padding: 40px 36px;
+    border-left: 4px solid transparent; transition: all 0.3s;
+  }
+  .policy-card:hover { border-left-color: var(--rust); }
+  .policy-flag { font-size: 28px; margin-bottom: 16px; }
+  .policy-card-title { font-family: 'Noto Serif SC', serif; font-size: 19px; font-weight: 700; color: var(--teal-deep); margin-bottom: 20px; }
+  .policy-list { list-style: none; }
+  .policy-list li {
+    padding: 10px 0; border-bottom: 1px solid var(--cream-dark);
+    font-size: 13.5px; color: var(--text-sub); line-height: 1.8;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .policy-list li::before { content: '◆'; color: var(--gold); font-size: 8px; margin-top: 6px; flex-shrink: 0; }
+  .policy-list li:last-child { border-bottom: none; }
+
+  .market-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  .market-table th {
+    background: var(--teal-deep); color: var(--cream);
+    padding: 14px 20px; text-align: left; font-family: 'Noto Serif SC', serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 1px;
+  }
+  .market-table td { padding: 14px 20px; font-size: 13.5px; color: var(--text-main); border-bottom: 1px solid var(--cream-dark); }
+  .market-table tr:last-child td { border-bottom: none; }
+  .market-table tr:nth-child(even) td { background: rgba(26,74,85,0.03); }
+  .market-table tr:hover td { background: rgba(26,74,85,0.07); }
+  .growth-badge {
+    display: inline-block; background: rgba(139,58,42,0.1);
+    color: var(--rust); padding: 3px 10px; border-radius: 2px;
+    font-size: 12px; font-weight: 600;
+  }
+
+  /* ─── ADVANTAGES ─── */
+  .adv-hero {
+    background: linear-gradient(135deg, #1a3a2a 0%, var(--teal-deep) 100%);
+    padding: 120px 0 80px; text-align: center;
+  }
+  .adv-hero .section-title { color: var(--cream); }
+  .adv-hero .section-sub { color: rgba(245,239,230,0.65); }
+
+  .resource-section { padding: 80px 0; }
+  .resource-section:nth-child(even) { background: white; }
+
+  .resource-heading {
+    font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700;
+    color: var(--teal-deep); margin-bottom: 40px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--cream-dark);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .resource-heading .line { flex: 1; height: 2px; background: linear-gradient(to right, var(--cream-dark), transparent); }
+
+  .partner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .partner-category {
+    background: var(--cream); border-radius: 4px; padding: 28px 24px;
+    border: 1px solid var(--cream-dark); transition: all 0.3s;
+  }
+  .partner-category:hover { border-color: var(--teal-light); box-shadow: 0 8px 30px rgba(26,74,85,0.1); }
+  .partner-cat-title {
+    font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+    color: var(--teal-deep); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cat-icon { font-size: 18px; }
+  .partner-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: rgba(45,122,138,0.1); color: var(--teal-mid);
+    padding: 4px 12px; border-radius: 2px; font-size: 12px;
+    border: 1px solid rgba(45,122,138,0.2);
+  }
+  .tag.rust { background: rgba(139,58,42,0.08); color: var(--rust); border-color: rgba(139,58,42,0.2); }
+  .tag.gold { background: rgba(201,168,76,0.1); color: #8a6f20; border-color: rgba(201,168,76,0.3); }
+
+  .school-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .school-item {
+    background: white; border: 1px solid var(--cream-dark);
+    padding: 20px; border-radius: 4px; transition: all 0.3s;
+    border-top: 3px solid var(--teal-light);
+  }
+  .school-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,74,85,0.1); }
+  .school-name { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 700; color: var(--teal-deep); margin-bottom: 6px; }
+  .school-detail { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
+
+  /* ─── TEAM ─── */
+  .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 60px; }
+  .team-card {
+    background: white; border-radius: 4px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(26,74,85,0.08); transition: all 0.3s;
+    display: grid; grid-template-columns: 160px 1fr;
+  }
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(26,74,85,0.15); }
+  .team-photo {
+    background: linear-gradient(135deg, var(--teal-mid), var(--teal-deep));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; min-height: 200px;
+  }
+  .team-info { padding: 32px; }
+  .team-name { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: var(--teal-deep); }
+  .team-name-en { font-family: 'Cinzel', serif; font-size: 13px; color: var(--rust); letter-spacing: 1px; margin-bottom: 4px; }
+  .team-role {
+    font-size: 12px; letter-spacing: 2px; color: var(--text-sub);
+    background: var(--cream); padding: 4px 12px; border-radius: 2px;
+    display: inline-block; margin-bottom: 16px;
+  }
+  .team-desc { font-size: 13px; color: var(--text-sub); line-height: 2; }
+
+  .advisor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .advisor-card {
+    background: var(--cream); border-radius: 4px; padding: 32px 28px;
+    border: 1px solid var(--cream-dark); transition: all 0.3s;
+  }
+  .advisor-card:hover { background: white; border-color: var(--teal-light); box-shadow: 0 8px 30px rgba(26,74,85,0.1); }
+  .advisor-name { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--teal-deep); margin-bottom: 4px; }
+  .advisor-title { font-size: 12px; color: var(--rust); letter-spacing: 1px; margin-bottom: 16px; }
+  .advisor-org { font-size: 12px; color: var(--text-sub); font-style: italic; margin-bottom: 14px; }
+  .advisor-desc { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
+
+  /* ─── PROJECTS ─── */
+  .project-hero {
+    background: linear-gradient(160deg, #0e2d38 0%, var(--teal-deep) 60%, #2a1a0e 100%);
+    padding: 120px 0 80px; text-align: center; position: relative; overflow: hidden;
+  }
+  .project-hero .section-title { color: var(--cream); }
+  .project-hero .section-sub { color: rgba(245,239,230,0.65); }
+
+  .concept-banner {
+    background: var(--teal-deep); padding: 60px;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center;
+  }
+  .concept-word {
+    font-family: 'Noto Serif SC', serif; font-size: 64px; font-weight: 900;
+    color: rgba(201,168,76,0.2); text-align: center; line-height: 1;
+    writing-mode: vertical-rl; text-orientation: mixed;
+    letter-spacing: 8px;
+  }
+  .concept-text { color: rgba(245,239,230,0.85); font-size: 15px; line-height: 2; }
+  .concept-text h3 { font-family: 'Noto Serif SC', serif; font-size: 24px; font-weight: 700; color: var(--gold); margin-bottom: 20px; }
+  .concept-values { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+  .cv-badge {
+    background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light); padding: 8px 20px; border-radius: 2px;
+    font-size: 13px; letter-spacing: 2px; font-family: 'Noto Serif SC', serif;
+  }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .project-card {
+    background: white; border-radius: 4px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(26,74,85,0.08); transition: all 0.3s;
+  }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(26,74,85,0.18); }
+  .project-card-header {
+    background: linear-gradient(135deg, var(--teal-deep), var(--teal-mid));
+    padding: 32px; text-align: center; position: relative; overflow: hidden;
+  }
+  .project-card-header::before {
+    content: attr(data-num);
+    position: absolute; right: -10px; bottom: -20px;
+    font-family: 'Cinzel', serif; font-size: 80px; font-weight: 600;
+    color: rgba(255,255,255,0.07);
+  }
+  .project-emoji { font-size: 36px; margin-bottom: 12px; }
+  .project-card-title { font-family: 'Noto Serif SC', serif; font-size: 17px; font-weight: 700; color: var(--cream); }
+  .project-card-body { padding: 28px; }
+  .project-card-desc { font-size: 13.5px; color: var(--text-sub); line-height: 2; margin-bottom: 16px; }
+  .project-type { font-size: 11px; letter-spacing: 2px; color: var(--rust); }
+
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--cream-dark); margin-top: 60px; }
+  .roadmap-phase { background: white; padding: 48px 36px; }
+  .roadmap-phase:first-child { border-top: 4px solid var(--gold); }
+  .roadmap-phase:nth-child(2) { border-top: 4px solid var(--teal-mid); }
+  .roadmap-phase:last-child { border-top: 4px solid var(--rust); }
+  .phase-period {
+    font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 2px;
+    color: var(--text-sub); margin-bottom: 12px;
+  }
+  .phase-title { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: var(--teal-deep); margin-bottom: 24px; }
+  .phase-items { list-style: none; }
+  .phase-items li {
+    padding: 10px 0; border-bottom: 1px solid var(--cream-dark);
+    font-size: 13.5px; color: var(--text-sub); line-height: 1.8;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .phase-items li::before { content: '→'; color: var(--teal-mid); flex-shrink: 0; font-weight: bold; }
+  .phase-items li:last-child { border-bottom: none; }
+
+  /* ─── FINANCIAL ─── */
+  .revenue-table { width: 100%; border-collapse: collapse; }
+  .revenue-table th {
+    background: var(--teal-deep); color: var(--cream);
+    padding: 16px 24px; text-align: center;
+    font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 600;
+  }
+  .revenue-table th:first-child { text-align: left; }
+  .revenue-table td {
+    padding: 16px 24px; text-align: center; border-bottom: 1px solid var(--cream-dark);
+    font-size: 14px; color: var(--text-main);
+  }
+  .revenue-table td:first-child { text-align: left; font-family: 'Noto Serif SC', serif; font-weight: 600; color: var(--teal-deep); }
+  .revenue-table tr:last-child td { border-bottom: none; background: rgba(26,74,85,0.05); font-weight: 700; font-size: 15px; }
+  .revenue-table tr:last-child td:first-child { color: var(--rust); }
+  .revenue-table .highlight { color: var(--rust); font-weight: 700; }
+  .revenue-note {
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+    padding: 16px 24px; border-radius: 4px; margin-top: 24px;
+    font-size: 13.5px; color: #8a6f20; line-height: 1.8;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-page {
+    min-height: calc(100vh - 68px);
+    background: linear-gradient(135deg, var(--teal-deep) 0%, #0e2d38 100%);
+    padding: 120px 0 80px; display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-page::before {
+    content: '联系我们'; position: absolute; right: -40px; top: 50%; transform: translateY(-50%);
+    font-family: 'Noto Serif SC', serif; font-size: 220px; font-weight: 900;
+    color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap;
+  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .contact-left h2 {
+    font-family: 'Noto Serif SC', serif; font-size: 42px; font-weight: 900;
+    color: var(--cream); margin-bottom: 16px;
+  }
+  .contact-left .sub { color: rgba(245,239,230,0.6); font-size: 15px; line-height: 2; margin-bottom: 48px; }
+  .contact-items { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+  .contact-icon {
+    width: 48px; height: 48px; background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0; border-radius: 2px;
+  }
+  .contact-detail { }
+  .contact-label { font-size: 11px; letter-spacing: 3px; color: var(--gold-light); margin-bottom: 4px; }
+  .contact-value { font-size: 16px; color: var(--cream); font-family: 'Noto Serif SC', serif; }
+  .contact-value a { color: var(--cream); text-decoration: none; }
+  .contact-value a:hover { color: var(--gold-light); }
+
+  .contact-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px; padding: 48px; backdrop-filter: blur(12px);
+  }
+  .contact-card h3 {
+    font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .contact-card p { color: rgba(245,239,230,0.7); font-size: 14px; line-height: 2; margin-bottom: 32px; }
+  .coop-list { list-style: none; }
+  .coop-list li {
+    padding: 12px 0; border-bottom: 1px solid rgba(201,168,76,0.15);
+    font-size: 14px; color: rgba(245,239,230,0.8);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .coop-list li::before { content: '✦'; color: var(--gold); font-size: 10px; }
+  .coop-list li:last-child { border-bottom: none; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink); padding: 48px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy { font-size: 12px; color: rgba(245,239,230,0.35); letter-spacing: 1px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-link {
+    font-size: 12px; color: rgba(245,239,230,0.5); cursor: pointer;
+    letter-spacing: 1px; transition: color 0.2s; border: none; background: none;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .footer-link:hover { color: var(--gold-light); }
+
+  /* ─── SECTION DIVIDER ─── */
+  .divider {
+    height: 2px; background: linear-gradient(to right, transparent, var(--teal-light), transparent);
+    margin: 0;
+  }
+  .section-alt { background: #f0eae0; }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table { width: 100%; border-collapse: collapse; }
+  .compare-table th {
+    padding: 16px 24px; text-align: center; font-family: 'Noto Serif SC', serif;
+    font-size: 14px; font-weight: 700;
+  }
+  .compare-table th:first-child { background: var(--teal-deep); color: var(--cream); text-align: left; }
+  .compare-table th:nth-child(2) { background: var(--rust); color: var(--cream); }
+  .compare-table th:nth-child(3) { background: #6a7a7a; color: var(--cream); }
+  .compare-table th:nth-child(4) { background: #4a4a5a; color: var(--cream); }
+  .compare-table td {
+    padding: 14px 24px; border-bottom: 1px solid var(--cream-dark);
+    font-size: 13.5px; color: var(--text-main); text-align: center;
+  }
+  .compare-table td:first-child { text-align: left; font-weight: 600; color: var(--teal-deep); background: rgba(26,74,85,0.04); }
+  .compare-table td:nth-child(2) { background: rgba(139,58,42,0.05); }
+  .strong-text { color: var(--rust); font-weight: 700; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .fade-up { animation: fadeInUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 60px 30px; }
+    .two-col, .team-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .three-col, .values-grid, .projects-grid, .partner-grid,
+    .advisor-grid, .roadmap, .stats-strip, .school-list { grid-template-columns: 1fr 1fr; }
+    .section-inner { padding: 0 30px; }
+    nav { padding: 0 20px; }
+    .nav-links { gap: 0; }
+    .nav-link { padding: 8px 10px; font-size: 12px; }
+    footer { padding: 32px 30px; }
+    .team-card { grid-template-columns: 1fr; }
+    .policy-grid { grid-template-columns: 1fr; }
+    .concept-banner { grid-template-columns: 1fr; }
+    .concept-word { writing-mode: horizontal-tb; font-size: 40px; }
+  }
+  @media (max-width: 600px) {
+    .three-col, .values-grid, .projects-grid, .partner-grid,
+    .advisor-grid, .roadmap, .stats-strip, .school-list { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-mark">森晟</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-cn">森晟文旅</span>
+      <span class="nav-logo-en">SunShore Journey Inc.</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home')">首页</button>
+    <button class="nav-link" onclick="showPage('market')">市场分析</button>
+    <button class="nav-link" onclick="showPage('advantages')">优势资源</button>
+    <button class="nav-link" onclick="showPage('projects')">项目服务</button>
+    <button class="nav-link" onclick="showPage('team')">管理团队</button>
+    <button class="nav-link" onclick="showPage('finance')">盈利预测</button>
+    <button class="nav-link" onclick="showPage('contact')">联系我们</button>
+  </div>
+</nav>
+
+<!-- ════════════════ HOME ════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-circle hero-circle-1"></div>
+    <div class="hero-circle hero-circle-2"></div>
+    <div class="hero-circle hero-circle-3"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">✦ 中加文旅交流先行者</div>
+        <h1 class="hero-title">连接两岸<br><span>共创未来</span></h1>
+        <p class="hero-subtitle">SunShore Journey Inc.</p>
+        <p class="hero-desc">
+          森晟文旅是专注于中加双向文化交流与教育旅行的高端运营商。我们以"尊重、沉浸、共创、可持续"为核心理念，超越观光，深度融合，让每一次旅程成为真正的文化实践。
+        </p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('projects')">探索项目</button>
+          <button class="btn-outline" onclick="showPage('contact')">洽谈合作</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-num">14<span class="stat-unit">万+</span></span>
+            <div class="stat-label">在加中国留学生</div>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num">35<span class="stat-unit">%</span></span>
+            <div class="stat-label">留学生中中国生占比</div>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num">10<span class="stat-unit">-12%</span></span>
+            <div class="stat-label">中加文化交流市场年复合增长率</div>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num">百亿<span class="stat-unit">加元</span></span>
+            <div class="stat-label">预计2030年市场规模</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>向下探索</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section" style="padding-top:0">
+    <div class="values-grid">
+      <div class="value-card fade-up delay-1">
+        <div class="value-icon">🏛️</div>
+        <div class="value-title">高端定位</div>
+        <p class="value-desc">面向高净值旅行者、企业团建及学术机构，提供精品化、定制化的深度文化体验服务。</p>
+      </div>
+      <div class="value-card fade-up delay-2">
+        <div class="value-icon">🎭</div>
+        <div class="value-title">深度沉浸</div>
+        <p class="value-desc">超越传统观光模式，让参与者成为暂时的"本地人"，真正融入当地文化与日常生活。</p>
+      </div>
+      <div class="value-card fade-up delay-3">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">双向融合</div>
+        <p class="value-desc">构建中加双向文化交流桥梁，不偏重任何一方，真正实现文化的平等对话与共同创造。</p>
+      </div>
+      <div class="value-card fade-up delay-4">
+        <div class="value-icon">🌱</div>
+        <div class="value-title">可持续发展</div>
+        <p class="value-desc">倡导负责任的旅行与交流，助力中加两国在教育、文化、商贸领域实现长期可持续合作。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Brief -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="two-col">
+        <div>
+          <div class="section-eyebrow">关于森晟</div>
+          <h2 class="section-title">以文化为魂<br>以科技为翼</h2>
+          <p style="font-size:15px;color:var(--text-sub);line-height:2;margin-bottom:24px;">
+            森晟文旅（SunShore Journey Inc.）由资深中加跨国教育与旅游业者共同创立，立足多伦多，辐射中加两国。公司整合顶级学术资源、政府资源与行业人脉，聚焦教育文旅融合，打造中加文化交流的新标杆。
+          </p>
+          <p style="font-size:15px;color:var(--text-sub);line-height:2;margin-bottom:32px;">
+            目前已运营冬夏令营与国际交流论坛项目，并规划推出"中加绿色能源科技交流"、"AI时代的教育改革交流"、"丝绸之路"等系列精品项目，为参与者提供超越观光的深度文化实践体验。
+          </p>
+          <button class="btn-primary" onclick="showPage('projects')">了解更多项目 →</button>
+        </div>
+        <div>
+          <div class="info-card" style="margin-bottom:20px;">
+            <div class="info-card-title"><div class="dot"></div>服务领域</div>
+            <p>高等教育合作 · 职业技能教育 · 文化体验研学旅行 · 艺术与创意产业交流 · 冬夏令营 · 国际交流论坛 · 商业考察</p>
+          </div>
+          <div class="info-card" style="margin-bottom:20px;">
+            <div class="info-card-title"><div class="dot"></div>核心优势</div>
+            <p>双向文化理解深度高 · 项目高度定制化 · 熟悉两国最新政策 · 整合VR及在线平台 · 优质优价的竞争定位</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-title"><div class="dot"></div>目标客群</div>
+            <p>高净值旅行者 · 企业团建与领导力培训 · K-12学校及家庭 · 大学与学术机构 · 文化机构与政府项目</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Nav Cards -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">深入了解</div>
+        <h2 class="section-title">探索各版块内容</h2>
+      </div>
+      <div class="three-col">
+        <div class="info-card" style="cursor:pointer;border-top-color:var(--gold)" onclick="showPage('market')">
+          <div class="info-card-title" style="font-size:20px">📊 市场分析</div>
+          <p>中加双边贸易、政策风向、行业解析与预期增长。了解中加文化交流市场的巨大潜力与机遇。</p>
+          <p style="color:var(--teal-mid);font-size:13px;margin-top:16px;font-weight:600;">查看详情 →</p>
+        </div>
+        <div class="info-card" style="cursor:pointer" onclick="showPage('advantages')">
+          <div class="info-card-title" style="font-size:20px">🌟 优势资源</div>
+          <p>深度整合的中加两国教育资源网络、业内人脉关系，以及具备跨国视野的专业管理团队。</p>
+          <p style="color:var(--teal-mid);font-size:13px;margin-top:16px;font-weight:600;">查看详情 →</p>
+        </div>
+        <div class="info-card" style="cursor:pointer;border-top-color:var(--rust)" onclick="showPage('projects')">
+          <div class="info-card-title" style="font-size:20px">🗺️ 项目服务</div>
+          <p>从冬夏令营到丝绸之路，多元化精品项目覆盖研学旅行、文化沉浸与商业考察全场景。</p>
+          <p style="color:var(--teal-mid);font-size:13px;margin-top:16px;font-weight:600;">查看详情 →</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('market')">市场</button>
+      <button class="footer-link" onclick="showPage('projects')">项目</button>
+      <button class="footer-link" onclick="showPage('contact')">联系</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅 · 版权所有</div>
+  </footer>
+</div>
+
+<!-- ════════════════ MARKET ════════════════ -->
+<div id="page-market" class="page">
+  <div class="market-hero">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="color:var(--gold-light)">MARKET ANALYSIS</div>
+      <h2 class="section-title">市场可行性分析</h2>
+      <p class="section-sub">深入解析中加两国政策背景、双边贸易格局与文旅行业发展趋势，把握时代机遇</p>
+    </div>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="strip-item">
+      <span class="strip-num">819<span class="strip-unit">亿</span></span>
+      <div class="strip-label">2021年中加双边贸易额（美元）</div>
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">12.16<span class="strip-unit">%</span></span>
+      <div class="strip-label">双边贸易年均增速</div>
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">56.15<span class="strip-unit">亿</span></span>
+      <div class="strip-label">2024年中国国内旅游出游人次</div>
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">10-12<span class="strip-unit">%</span></span>
+      <div class="strip-label">中加文化交流市场年复合增长率</div>
+    </div>
+  </div>
+
+  <!-- China-Canada Relations -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">政策风向</div>
+        <h2 class="section-title">中加双边关系</h2>
+        <p class="section-sub">半个世纪的邦交积淀，为中加文旅合作奠定坚实的政治与制度基础</p>
+      </div>
+      <div class="policy-grid">
+        <div class="policy-card">
+          <div class="policy-flag">🇨🇳</div>
+          <div class="policy-card-title">中国政策支持</div>
+          <ul class="policy-list">
+            <li>《"十四五"旅游业发展规划》提出建设世界级旅游景区和度假区</li>
+            <li>2024年"五一"期间全国发放超20亿元文旅消费券</li>
+            <li>2025年春节假期及十一假期均延长至8天，激活市场活力</li>
+            <li>大力推广"一带一路"文化产业国际合作，中华文化走出国门</li>
+            <li>2023年教育部《推进教育国际交流与合作高质量发展指导意见》</li>
+            <li>文化贸易企业可享增值税减免，省级专项基金支持国际文化交流</li>
+            <li>240小时免签证过境签及新K类别工作签证，便利人员往来</li>
+          </ul>
+        </div>
+        <div class="policy-card">
+          <div class="policy-flag">🇨🇦</div>
+          <div class="policy-card-title">加拿大政策支持</div>
+          <ul class="policy-list">
+            <li>国际教育战略（2024-2028）设定到2028年吸引超过100万国际学生目标</li>
+            <li>特别强调与亚洲国家（包括中国）的教育合作</li>
+            <li>简化签证流程，增加工作机会，支持教育机构开发国际合作项目</li>
+            <li>文化产业发展基金（CDIF）为数字媒体、艺术展览等提供资金支持</li>
+            <li>出口促进部门积极协助本地教育机构和文化企业开拓中国市场</li>
+            <li>加拿大投资署为外国投资者提供投资信息、政策介绍与实地考察支持</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Market Share -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">市场份额</div>
+        <h2 class="section-title">教育与文化交流市场</h2>
+        <p class="section-sub">中国是全球最大的国际学生输出国之一，加拿大则是备受青睐的留学目的地</p>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="info-card">
+            <div class="info-card-title"><div class="dot"></div>留学生市场规模</div>
+            <p style="margin-bottom:20px">截至2023年，加拿大中国留学生人数超过<strong style="color:var(--rust)">14万</strong>，占加拿大国际学生总数的<strong style="color:var(--rust)">35%以上</strong>。</p>
+            <p>加拿大来华留学和交流人数年均增长率约为<strong style="color:var(--rust)">6%</strong>。预计到2030年，中加教育合作市场规模将达到<strong style="color:var(--rust)">百亿加元</strong>级别。</p>
+          </div>
+        </div>
+        <div>
+          <div class="info-card">
+            <div class="info-card-title"><div class="dot"></div>文旅市场复苏</div>
+            <p style="margin-bottom:16px">自2023年以来，中国文旅市场强劲复苏：</p>
+            <ul style="list-style:none">
+              <li style="padding:8px 0;border-bottom:1px solid var(--cream-dark);font-size:13.5px;color:var(--text-sub)">· 2024年全国国内旅游出游人次达<strong>56.15亿</strong>，同比增长14.8%</li>
+              <li style="padding:8px 0;border-bottom:1px solid var(--cream-dark);font-size:13.5px;color:var(--text-sub)">· 2024年入境游客<strong>1.32亿人次</strong>，同比增长60.8%</li>
+              <li style="padding:8px 0;font-size:13.5px;color:var(--text-sub)">· 2024年文旅融合行业市场规模约<strong>2.32万亿元</strong>，预计2030年接近7万亿元</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Market Table -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">预期增长</div>
+        <h2 class="section-title">目标市场细分与规模预期</h2>
+      </div>
+      <table class="market-table">
+        <thead>
+          <tr>
+            <th>目标市场细分</th>
+            <th>前市场规模（年价值）</th>
+            <th>年增长率预期</th>
+            <th>主要客户群体</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>高等教育合作</strong></td>
+            <td>400万加元</td>
+            <td><span class="growth-badge">8%</span></td>
+            <td>大学、教育机构</td>
+          </tr>
+          <tr>
+            <td><strong>职业与技能教育</strong></td>
+            <td>150万加元</td>
+            <td><span class="growth-badge">2%</span></td>
+            <td>职业学校、企业培训部门</td>
+          </tr>
+          <tr>
+            <td><strong>文化体验与研学旅行</strong></td>
+            <td>250万加元</td>
+            <td><span class="growth-badge">10%</span></td>
+            <td>K-12学校、家庭、企业团队</td>
+          </tr>
+          <tr>
+            <td><strong>艺术与创意产业交流</strong></td>
+            <td>10万加元</td>
+            <td><span class="growth-badge">15%</span></td>
+            <td>文化机构、艺术团体、政府项目</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="revenue-note" style="margin-top:32px">
+        📈 根据行业报告，中加文化交流市场的年均复合增长率（CAGR）预计为10-12%，2025年至2031年期间将持续增长。这种增长得益于两国经济的互补性和政策支持，为森晟文旅提供了广阔的市场空间。
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitive Analysis -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">行业解析</div>
+        <h2 class="section-title">横向竞争对比</h2>
+        <p class="section-sub">森晟文旅的差异化竞争优势</p>
+      </div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>🏆 森晟文旅</th>
+            <th>传统留学中介</th>
+            <th>大型文化机构</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>文化理解深度</td>
+            <td class="strong-text">高（双向融合）</td>
+            <td>中等（单向为主）</td>
+            <td>高（但偏重一方）</td>
+          </tr>
+          <tr>
+            <td>项目定制化能力</td>
+            <td class="strong-text">强（根据客户需求灵活调整）</td>
+            <td>弱（标准化产品居多）</td>
+            <td>中等</td>
+          </tr>
+          <tr>
+            <td>政策应用能力</td>
+            <td class="strong-text">强（熟悉两国最新政策）</td>
+            <td>中等</td>
+            <td>强</td>
+          </tr>
+          <tr>
+            <td>技术整合与创新</td>
+            <td class="strong-text">强（VR、在线平台增强体验）</td>
+            <td>弱</td>
+            <td>中等</td>
+          </tr>
+          <tr>
+            <td>价格竞争力</td>
+            <td class="strong-text">中等（优质优价）</td>
+            <td>高（低价竞争）</td>
+            <td>低（项目成本高）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('projects')">项目</button>
+      <button class="footer-link" onclick="showPage('contact')">联系</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅</div>
+  </footer>
+</div>
+
+<!-- ════════════════ ADVANTAGES ════════════════ -->
+<div id="page-advantages" class="page">
+  <div class="adv-hero">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="color:var(--gold-light)">ADVANTAGES & RESOURCES</div>
+      <h2 class="section-title">优势与资源</h2>
+      <p class="section-sub">深度整合的中加两国教育资源网络与行业人脉，为项目落地提供强大支撑</p>
+    </div>
+  </div>
+
+  <!-- China Resources -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="resource-heading">
+        🇨🇳 中国合作资源 <div class="line"></div>
+      </div>
+      <div class="partner-grid">
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">✈️</span> 航司合作</div>
+          <div class="partner-tags">
+            <span class="tag">中国南方航空</span>
+            <span class="tag">中国国际航空</span>
+            <span class="tag">中国东方航空</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🏫</span> 国际学校</div>
+          <div class="partner-tags">
+            <span class="tag">北京王府中学</span>
+            <span class="tag">上海新虹桥中学</span>
+            <span class="tag">扬州中学教育集团树人学校</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">⛺</span> 营地合作</div>
+          <div class="partner-tags">
+            <span class="tag rust">京师乐育</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🗺️</span> 5A级景区</div>
+          <div class="partner-tags">
+            <span class="tag gold">济南大明湖</span>
+            <span class="tag gold">山东泰安</span>
+            <span class="tag gold">湖北恩施</span>
+            <span class="tag gold">湖南张家界</span>
+            <span class="tag gold">三亚亚龙湾</span>
+            <span class="tag gold">嘉兴乌镇</span>
+            <span class="tag gold">杭州西溪湿地</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🧳</span> 旅行社</div>
+          <div class="partner-tags">
+            <span class="tag">国旅CITS</span>
+            <span class="tag">青旅CYTS</span>
+            <span class="tag">携程CTrip</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🏨</span> 连锁酒店</div>
+          <div class="partner-tags">
+            <span class="tag">四季 FourSeasons</span>
+            <span class="tag">万豪 Marriott</span>
+            <span class="tag">假日 Holiday Inn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Canada Resources -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="resource-heading">
+        🇨🇦 加拿大合作资源 <div class="line"></div>
+      </div>
+      <div class="partner-grid">
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🏛️</span> 华人商会 & 校友会</div>
+          <div class="partner-tags">
+            <span class="tag">加拿大多伦多福清商会</span>
+            <span class="tag">加拿大青商会 C.Y.B.C.</span>
+            <span class="tag">黑龙江商会</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🎓</span> 私立学校</div>
+          <div class="partner-tags">
+            <span class="tag rust">Royal Crown School</span>
+            <span class="tag rust">The Erindale Academy</span>
+            <span class="tag rust">Cambridge Academy</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🏆</span> 职业运动队</div>
+          <div class="partner-tags">
+            <span class="tag gold">多伦多枫叶 NHL</span>
+            <span class="tag gold">多伦多猛龙 NBA</span>
+            <span class="tag gold">多伦多蓝雀 MLB</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">📚</span> CAIS顶级私校联盟</div>
+          <div class="partner-tags">
+            <span class="tag">Albert College</span>
+            <span class="tag">Appleby College</span>
+            <span class="tag">Branksome Hall</span>
+            <span class="tag">Havergal College</span>
+            <span class="tag">Ridley College</span>
+            <span class="tag">UCC</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">🏡</span> 本地住家 & 社区</div>
+          <div class="partner-tags">
+            <span class="tag">精选本地住家网络</span>
+            <span class="tag">社区运动场馆</span>
+            <span class="tag">学术俱乐部</span>
+          </div>
+        </div>
+        <div class="partner-category">
+          <div class="partner-cat-title"><span class="cat-icon">💼</span> 体育俱乐部</div>
+          <div class="partner-tags">
+            <span class="tag">冰球俱乐部</span>
+            <span class="tag">篮球俱乐部</span>
+            <span class="tag">足球俱乐部</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ontario Education System -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="resource-heading">
+        📖 安省教育体系概览 <div class="line"></div>
+      </div>
+      <div class="two-col" style="margin-bottom:48px">
+        <div>
+          <p style="font-size:14px;color:var(--text-sub);line-height:2;margin-bottom:20px">
+            安省设有85个公校和天主教公校教育局，共4926所学校，从幼儿园到12年级，对国际留学生友好。此外，有80多家私校，其中<strong style="color:var(--rust)">15家CAIS联盟顶级私校</strong>代表了安省最高端的教学环境。
+          </p>
+          <div style="background:var(--teal-deep);padding:28px;border-radius:4px;color:var(--cream)">
+            <div style="font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px">安省中学毕业证书 OSSD</div>
+            <ul style="list-style:none">
+              <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:13px">✓ 学生须完成30个高中学分（科目）</li>
+              <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:13px">✓ 每个学分须达到110小时授课时间</li>
+              <li style="padding:6px 0;font-size:13px">✓ 秋/冬/夏三学期制，灵活多元</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="info-card">
+            <div class="info-card-title"><div class="dot"></div>大学后教育路径</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+              <div style="background:var(--cream);padding:14px;border-left:3px solid var(--teal-mid)">
+                <strong style="color:var(--teal-deep)">大学本科</strong> <span style="color:var(--text-sub);font-size:13px">— 4年制</span>
+              </div>
+              <div style="background:var(--cream);padding:14px;border-left:3px solid var(--gold)">
+                <strong style="color:var(--teal-deep)">社区学院</strong> <span style="color:var(--text-sub);font-size:13px">— 2年制</span>
+              </div>
+              <div style="background:var(--cream);padding:14px;border-left:3px solid var(--rust)">
+                <strong style="color:var(--teal-deep)">研究生/博士生</strong> <span style="color:var(--text-sub);font-size:13px">— 2年以上</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="school-list">
+        <div class="school-item"><div class="school-name">Albert College</div><div class="school-detail">Belleville, Ontario · Pre-K to Grade 12 · Co-Ed · 300人</div></div>
+        <div class="school-item"><div class="school-name">Appleby College</div><div class="school-detail">Oakville, Ontario · Grades 7-12 · Co-Ed · 725人</div></div>
+        <div class="school-item"><div class="school-name">Branksome Hall</div><div class="school-detail">Toronto, Ontario · K-12 · Girls · 900人</div></div>
+        <div class="school-item"><div class="school-name">Havergal College</div><div class="school-detail">Toronto, Ontario · K-12 · Girls · 1050人</div></div>
+        <div class="school-item"><div class="school-name">Ridley College</div><div class="school-detail">St. Catharines · JK-Grade 12 · Co-Ed · 765人</div></div>
+        <div class="school-item"><div class="school-name">Upper Canada College</div><div class="school-detail">Toronto, Ontario · K-12 · Boys · 1170人</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('team')">团队</button>
+      <button class="footer-link" onclick="showPage('contact')">联系</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅</div>
+  </footer>
+</div>
+
+<!-- ════════════════ PROJECTS ════════════════ -->
+<div id="page-projects" class="page">
+  <div class="project-hero">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="color:var(--gold-light)">PROGRAMS & SERVICES</div>
+      <h2 class="section-title">项目服务</h2>
+      <p class="section-sub" style="color:rgba(245,239,230,0.65)">高端 · 深度 · 专业的文化实践旅行设计与运营</p>
+    </div>
+  </div>
+
+  <!-- Concept -->
+  <div class="concept-banner">
+    <div class="concept-word">文化</div>
+    <div class="concept-text">
+      <h3>项目理念与设计</h3>
+      <p>超越观光，深度沉浸。通过精心设计的实践性体验，促进跨文化理解与对话，让旅行者成为暂时的"本地人"，而非永恒的游客。</p>
+      <p style="margin-top:16px">森晟文旅的项目设计以文化融合和实践学习为核心。我们相信，真正的文化理解来自参与、来自体验、来自与人的真实连结。</p>
+      <div class="concept-values">
+        <span class="cv-badge">尊重</span>
+        <span class="cv-badge">沉浸</span>
+        <span class="cv-badge">共创</span>
+        <span class="cv-badge">可持续</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects Grid -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">精品项目</div>
+        <h2 class="section-title">旗舰项目矩阵</h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-card-header" data-num="01">
+            <div class="project-emoji">❄️☀️</div>
+            <div class="project-card-title">冬夏令营</div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-card-desc">提供专业培训课程，包括基本技能训练、战术指导和身体素质提升。为中加两国青少年创造沉浸式体育与文化交流体验。</p>
+            <span class="project-type">当前运营 · 青少年项目</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-header" data-num="02" style="background:linear-gradient(135deg,#3a2a1a,#6a4a2a)">
+            <div class="project-emoji">🌐</div>
+            <div class="project-card-title">国际交流论坛</div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-card-desc">汇聚中加两国教育、文化、商界精英，围绕共同关切的议题展开深度对话，推动双边关系实质性发展。</p>
+            <span class="project-type">当前运营 · 高端论坛</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-header" data-num="03" style="background:linear-gradient(135deg,#1a3a1a,#2a6a3a)">
+            <div class="project-emoji">⚡</div>
+            <div class="project-card-title">中加绿色能源科技交流</div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-card-desc">结合中国在太阳能技术方面的优势与加拿大在清洁技术研发方面的专长，为学生和企业专业人士提供跨文化学习与合作创新平台。</p>
+            <span class="project-type">规划推出 · 科技教育</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-header" data-num="04" style="background:linear-gradient(135deg,#2a1a3a,#4a2a6a)">
+            <div class="project-emoji">🤖</div>
+            <div class="project-card-title">AI时代的教育改革交流</div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-card-desc">聚焦AI技术在K12教育中的改革与实践，汇聚两国教育专家、校长和政策制定者，共同探讨教育的未来走向。</p>
+            <span class="project-type">规划推出 · 教育创新</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-header" data-num="05" style="background:linear-gradient(135deg,#3a1a1a,var(--rust))">
+            <div class="project-emoji">🐪</div>
+            <div class="project-card-title">丝绸之路 · 又见系列</div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-card-desc">以沉浸式文化体验为核心，在回忆历史与展望未来中互相学习。让参与者穿越历史长河，感受中华文明的深厚积淀。</p>
+            <span class="project-type">规划推出 · 文化沉浸</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-header" data-num="06" style="background:linear-gradient(135deg,#1a2a3a,#2a4a6a)">
+            <div class="project-emoji">🏒</div>
+            <div class="project-card-title">冰城友谊赛 · 姐妹城帮</div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-card-desc">利用中加两国多对友好城市关系，组织体育友谊赛与城市文化交流，以体育为媒介促进民间外交与青年友谊。</p>
+            <span class="project-type">规划推出 · 体育外交</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample Itinerary -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">行程示例</div>
+        <h2 class="section-title">精品路线一览</h2>
+        <p class="section-sub">以下为部分精品行程概览，所有项目均可根据客户需求深度定制</p>
+      </div>
+      <div class="two-col">
+        <div class="info-card" style="border-top-color:var(--rust)">
+          <div class="info-card-title" style="font-size:20px"><div class="dot"></div>🇨🇳 感知中国魅力</div>
+          <p style="font-weight:600;color:var(--teal-deep);margin-bottom:12px">北京、南京、上海多元文化参访行 · 7天</p>
+          <p style="margin-bottom:16px">在京津冀与长三角交汇处，探访故宫千年文明、秦淮厚重文脉与外滩摩登风情。</p>
+          <ul style="list-style:none">
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub);border-bottom:1px solid var(--cream-dark)">📍 故宫博物院 · 宫殿之海</li>
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub);border-bottom:1px solid var(--cream-dark)">📍 天坛 · 天圆地方</li>
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub);border-bottom:1px solid var(--cream-dark)">📍 北京烤鸭 · 老北京夜食</li>
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub)">📍 长城 · 不到长城非好汉</li>
+          </ul>
+        </div>
+        <div class="info-card" style="border-top-color:var(--teal-mid)">
+          <div class="info-card-title" style="font-size:20px"><div class="dot" style="background:var(--teal-mid)"></div>🇨🇦 加拿大东西岸</div>
+          <p style="font-weight:600;color:var(--teal-deep);margin-bottom:12px">海洋三省 · 20天深度游</p>
+          <p style="margin-bottom:16px">从温哥华的山海壮阔到魁北克的法式浪漫，穿越新斯科舍与爱德华王子岛，感受加拿大多元文化魅力。</p>
+          <ul style="list-style:none">
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub);border-bottom:1px solid var(--cream-dark)">📍 魁北克城 · 世界遗产</li>
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub);border-bottom:1px solid var(--cream-dark)">📍 哈利法克斯 · 大西洋明珠</li>
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub);border-bottom:1px solid var(--cream-dark)">📍 爱德华王子岛 · 绿山墙的安妮故乡</li>
+            <li style="padding:6px 0;font-size:13px;color:var(--text-sub)">📍 尼亚加拉大瀑布 · 震撼心灵</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">目标计划</div>
+        <h2 class="section-title">三阶段发展路径</h2>
+      </div>
+      <div class="roadmap">
+        <div class="roadmap-phase">
+          <div class="phase-period">2025 — 2026</div>
+          <div class="phase-title">市场切入与<br>品牌建立</div>
+          <ul class="phase-items">
+            <li>成功推出3-4条精品试点路线</li>
+            <li>服务客户300-500人，NPS达80以上</li>
+            <li>复购/推荐率超30%</li>
+            <li>建立深度文化实践专家形象</li>
+            <li>建立稳定本地资源网络与轻资产运营流程</li>
+          </ul>
+        </div>
+        <div class="roadmap-phase">
+          <div class="phase-period">2027 — 2030</div>
+          <div class="phase-title">规模扩张与<br>深化运营</div>
+          <ul class="phase-items">
+            <li>路线扩展至5-10个主要文化区域</li>
+            <li>建立"SHJ体验标准"，授权培训合作伙伴</li>
+            <li>构建文化资源数据库和专家网络</li>
+            <li>开发SHJ客户端App，提升数字体验</li>
+            <li>开拓高端企业团建市场</li>
+          </ul>
+        </div>
+        <div class="roadmap-phase">
+          <div class="phase-period">2030 以后</div>
+          <div class="phase-title">行业标杆与<br>平台生态</div>
+          <ul class="phase-items">
+            <li>成为跨国文化实践学习领域的代名词</li>
+            <li>发布年度《全球文化融合旅行趋势报告》</li>
+            <li>推出"SHJ精选"文创产品线</li>
+            <li>开发线上大师课（MasterClass）</li>
+            <li>探索与教育机构的学分认证合作</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('finance')">盈利预测</button>
+      <button class="footer-link" onclick="showPage('contact')">联系</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅</div>
+  </footer>
+</div>
+
+<!-- ════════════════ TEAM ════════════════ -->
+<div id="page-team" class="page">
+  <div class="adv-hero" style="background:linear-gradient(135deg,#1a2a38 0%,var(--teal-deep) 100%)">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="color:var(--gold-light)">MANAGEMENT TEAM</div>
+      <h2 class="section-title">管理团队</h2>
+      <p class="section-sub">兼具中加两国背景的复合型专业团队，为项目成功提供坚实保障</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo">👨‍💼</div>
+          <div class="team-info">
+            <div class="team-name-en">Hunter Sun</div>
+            <div class="team-name">孙先生</div>
+            <div class="team-role">总裁 · President</div>
+            <p class="team-desc">拥有超过二十年扎实工作经验，兼具中国和加拿大两地成功职业经历。在中国深耕汽车、烟草和餐饮等高要求行业，培养了强大的技术执行力。移民加拿大10多年来，成功将经验应用于本地餐饮和教育行业，创立并运营教育咨询公司，擅长整合资源，展现出卓越的适应与跨文化沟通能力。</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">👩‍💼</div>
+          <div class="team-info">
+            <div class="team-name-en">Michelle Lu</div>
+            <div class="team-name">卢女士</div>
+            <div class="team-role">副总裁 · Vice President</div>
+            <p class="team-desc">拥有超过20年北美专业经验的战略家与创业者，复合型背景独特。东北师范大学计算机科学教育背景培养了严谨逻辑思维，早年十大主持人经历塑造了出众的沟通能力与公众影响力。自2000年技术移民加拿大以来，成功将核心能力应用于法律、保险及教育等多个行业，创立并运营自己的教育咨询公司。</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">👩‍🎓</div>
+          <div class="team-info">
+            <div class="team-name-en">Yang Shenghua</div>
+            <div class="team-name">杨升花</div>
+            <div class="team-role">项目经理 · Project Manager</div>
+            <p class="team-desc">拥有20年国际教育项目规划和培训实施经验。专业能力包括教育项目管理、国际教育规划、教育政策发展、国际教育师资培训项目方案策划与推广、公共演讲，以及丰富的跨文化工作经验和人际交往能力。</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">👩‍💻</div>
+          <div class="team-info">
+            <div class="team-name-en">Zahra Fadhlaoui</div>
+            <div class="team-name">Zahra</div>
+            <div class="team-role">市场部主管 · Marketing Director</div>
+            <p class="team-desc">毕业于多伦多大学文学和政治科学专业，后获律师助理执照，自2015年起从事移民法和保险诉讼业务。积极倡导多元化、包容性和平等，并将这些价值观融入职业与个人生活。具有超强的市场敏锐性和领导力，在企业内部推广活动中做出杰出贡献。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Advisors -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">顾问团队</div>
+        <h2 class="section-title">战略顾问</h2>
+        <p class="section-sub">汇聚法律、教育与国际事务领域的顶尖专家，为企业决策提供专业支撑</p>
+      </div>
+      <div class="advisor-grid">
+        <div class="advisor-card">
+          <div class="advisor-name">Joel Cormier</div>
+          <div class="advisor-title">法律顾问</div>
+          <div class="advisor-org">Davidson Cahill Morrison LLP</div>
+          <p class="advisor-desc">2005年皇后大学法学学士，2006年成为安省律师协会律师。专业领域包括人身伤害赔偿、建筑和商业诉讼，拥有丰富的审判和上诉经验，以积极亲民的态度和专业犀利的工作作风著称。</p>
+        </div>
+        <div class="advisor-card">
+          <div class="advisor-name">普光彪</div>
+          <div class="advisor-title">国际教育专家顾问</div>
+          <div class="advisor-org">PAUL PU · The Erindale Academy</div>
+          <p class="advisor-desc">30余年教育管理经验。多伦多大学教育领导力博士，哈佛大学高级教育领导力证书，MIT人工智能与商业策略证书。全球青少年挑战赛（GYC）主席，AI在北美K12教育改革的先驱者，多伦多Erindale Academy课程改革总督导。</p>
+        </div>
+        <div class="advisor-card">
+          <div class="advisor-name">Tracy Lu</div>
+          <div class="advisor-title">教育顾问</div>
+          <div class="advisor-org">苏安高中副校长 · SUON Academy</div>
+          <p class="advisor-desc">多伦多大学教育学硕士，资深升学指导，拥有世界500强企业核心团队工作经历，能更好地帮助学生进行学业及大学专业申报规划，深度了解中加两国教育体系差异。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('contact')">联系</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅</div>
+  </footer>
+</div>
+
+<!-- ════════════════ FINANCE ════════════════ -->
+<div id="page-finance" class="page">
+  <div class="market-hero" style="background:linear-gradient(135deg,#2a1a0e 0%,var(--rust) 60%,#3a2a0e 100%)">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="color:rgba(245,239,230,0.6)">FINANCIAL PROJECTION</div>
+      <h2 class="section-title">盈利预测</h2>
+      <p class="section-sub">五年财务规划，清晰呈现森晟文旅的增长轨迹与商业价值</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">收入模型</div>
+        <h2 class="section-title">五年收入预测</h2>
+        <p class="section-sub">收入主要来自项目咨询费、定制项目服务费及平台会员收入三大板块</p>
+      </div>
+
+      <table class="revenue-table">
+        <thead>
+          <tr>
+            <th style="width:25%">收入来源</th>
+            <th>第一年</th>
+            <th>第二年</th>
+            <th>第三年</th>
+            <th>第五年</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>项目咨询费</td>
+            <td>$100,000</td>
+            <td>$200,000</td>
+            <td>$300,000</td>
+            <td class="highlight">$500,000</td>
+          </tr>
+          <tr>
+            <td>定制项目服务费</td>
+            <td>$300,000</td>
+            <td>$600,000</td>
+            <td>$1,200,000</td>
+            <td class="highlight">$2,000,000</td>
+          </tr>
+          <tr>
+            <td>平台会员收入</td>
+            <td>$50,000</td>
+            <td>$100,000</td>
+            <td>$200,000</td>
+            <td class="highlight">$400,000</td>
+          </tr>
+          <tr>
+            <td>总收入</td>
+            <td>$450,000</td>
+            <td>$900,000</td>
+            <td>$1,700,000</td>
+            <td class="highlight">$2,900,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="revenue-note">
+        💡 <strong>盈利说明：</strong>盈利按60%计算，短期盈利约在 <strong>$500,000加元</strong>左右。中期和长期盈利可超过 <strong>一百万加元/年</strong>。以首个旗舰项目为例，预计每位参与者收费3,000-5,000加元，初期每年接待500名参与者，年收入约为150-250万加元。
+      </div>
+    </div>
+  </section>
+
+  <!-- Revenue Sources -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">业务模型</div>
+        <h2 class="section-title">核心收入来源解析</h2>
+      </div>
+      <div class="three-col">
+        <div class="info-card" style="border-top-color:var(--gold)">
+          <div class="info-card-title"><div class="dot" style="background:var(--gold)"></div>项目咨询费</div>
+          <p>为教育机构、企业和政府提供专业的中加文化交流项目策划与咨询服务。包括市场调研、方案设计、政策申报等综合咨询服务，按项目规模收取顾问费。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title"><div class="dot"></div>定制项目服务费</div>
+          <p>为高净值个人、家庭及企业团体提供全程定制化文化体验和教育旅行服务。涵盖行程设计、资源对接、全程陪同等一站式解决方案，是公司最主要的收入来源。</p>
+        </div>
+        <div class="info-card" style="border-top-color:var(--rust)">
+          <div class="info-card-title"><div class="dot" style="background:var(--rust)"></div>平台会员收入</div>
+          <p>搭建连接中加两国教育机构、文化组织与专业人士的数字化平台，通过会员订阅、信息撮合等方式产生持续性收入，随网络效应不断增强而加速增长。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Growth Indicators -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">增长驱动</div>
+        <h2 class="section-title">核心增长驱动因素</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px">
+        <div class="info-card">
+          <div class="info-card-title"><div class="dot"></div>市场扩张驱动</div>
+          <ul style="list-style:none">
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);font-size:13.5px;color:var(--text-sub)">· 中加文化交流市场CAGR预计10-12%，持续高速增长</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);font-size:13.5px;color:var(--text-sub)">· 两国政策双向支持，市场准入门槛降低</li>
+            <li style="padding:10px 0;font-size:13.5px;color:var(--text-sub)">· 中国文旅市场规模2030年预计接近7万亿元人民币</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title"><div class="dot"></div>竞争优势驱动</div>
+          <ul style="list-style:none">
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);font-size:13.5px;color:var(--text-sub)">· 稀缺的双向文化理解深度，形成差异化壁垒</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);font-size:13.5px;color:var(--text-sub)">· 强大的中加两国合作资源网络，降低运营成本</li>
+            <li style="padding:10px 0;font-size:13.5px;color:var(--text-sub)">· 专业团队兼具两国从业背景，客户信任度高</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('contact')">联系</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅</div>
+  </footer>
+</div>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<div id="page-contact" class="page">
+  <div class="contact-page">
+    <div class="section-inner" style="width:100%">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <div class="section-eyebrow" style="color:var(--gold-light);justify-content:flex-start;margin-bottom:24px">CONTACT US</div>
+          <h2>欢迎合作</h2>
+          <p class="sub">森晟文旅期待与您携手，共同探索中加文化交流的无限可能。无论是教育机构合作、企业团建定制，还是个人精品旅行，我们都将为您量身打造最优方案。</p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div class="contact-detail">
+                <div class="contact-label">电子邮件</div>
+                <div class="contact-value"><a href="mailto:info@sunshorejourney.com">info@sunshorejourney.com</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-detail">
+                <div class="contact-label">联系电话</div>
+                <div class="contact-value"><a href="tel:4168563455">416-856-3455</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">💬</div>
+              <div class="contact-detail">
+                <div class="contact-label">微信</div>
+                <div class="contact-value">jun200801158</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-detail">
+                <div class="contact-label">总部</div>
+                <div class="contact-value">多伦多 · Toronto, Ontario, Canada</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="contact-card">
+            <h3>合作领域</h3>
+            <p>我们诚邀各类合作伙伴共同推动中加文化交流事业的发展，以下是我们重点欢迎的合作方向：</p>
+            <ul class="coop-list">
+              <li>教育机构 — 大学、私立学校、职业培训机构</li>
+              <li>文化组织 — 博物馆、艺术团体、文化基金会</li>
+              <li>企业客户 — 团建定制、领导力培训、商务考察</li>
+              <li>政府机构 — 友好城市合作、文化外交项目</li>
+              <li>旅游行业 — 旅行社、酒店集团、航空公司</li>
+              <li>科技公司 — AI教育、VR体验、数字文旅平台</li>
+            </ul>
+          </div>
+          <div style="margin-top:24px;text-align:center">
+            <a href="mailto:info@sunshorejourney.com">
+              <button class="btn-primary" style="font-size:15px;padding:16px 48px">立即发送合作邮件</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">森晟 <span>文旅</span> · SunShore Journey Inc.</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showPage('home')">首页</button>
+      <button class="footer-link" onclick="showPage('projects')">项目</button>
+      <button class="footer-link" onclick="showPage('market')">市场</button>
+    </div>
+    <div class="footer-copy">© 2025 SunShore Journey Inc. 森晟文旅 · All Rights Reserved</div>
+  </footer>
+</div>
+
+<script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const links = document.querySelectorAll('.nav-link');
+    const map = { home:0, market:1, advantages:2, projects:3, team:4, finance:5, contact:6 };
+    if (map[name] !== undefined) links[map[name]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
